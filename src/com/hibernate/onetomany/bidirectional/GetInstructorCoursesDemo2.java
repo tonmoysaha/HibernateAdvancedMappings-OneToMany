@@ -10,7 +10,7 @@ import com.hibernate.onetomany.entityclass.bidirectional.Courses;
 import com.hibernate.onetomany.entityclass.bidirectional.Instructor;
 import com.hibernate.onetomany.entityclass.bidirectional.InstructorDetailClass;
 
-public class CreateCourseDemo {
+public class GetInstructorCoursesDemo2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,18 +25,14 @@ public class CreateCourseDemo {
 			
 
 			session.beginTransaction();
+		
 			int instructorId = 3;
 
 			Instructor instructor = session.get(Instructor.class, instructorId);
 			
-			Courses courses = new Courses("oop");
-			Courses courses2 = new Courses("java");
-
-			instructor.add(courses);
-			instructor.add(courses2);
-
-			session.save(courses);
-			session.save(courses2);
+			System.out.println("the instructor" +instructor);
+			
+			System.out.println("instructor courses with id: "+ instructorId +": "+instructor.getCourses());
 
 			session.getTransaction().commit();
 		} finally {

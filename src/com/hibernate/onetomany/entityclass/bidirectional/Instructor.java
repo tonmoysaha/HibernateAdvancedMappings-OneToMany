@@ -1,5 +1,6 @@
 package com.hibernate.onetomany.entityclass.bidirectional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Instructor {
 	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetailClass instructorDetailClass;
 
-	@OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private List<Courses> courses;
 
 	public Instructor() {
@@ -95,6 +96,15 @@ public class Instructor {
 
 	public void setCourses(List<Courses> courses) {
 		this.courses = courses;
+	}
+	
+	public void add(Courses tempCourse) {
+		if (courses == null) {
+			courses = new ArrayList<>();
+		}
+		courses.add(tempCourse);
+		
+		tempCourse.setInstructor(this);
 	}
 
 	@Override
