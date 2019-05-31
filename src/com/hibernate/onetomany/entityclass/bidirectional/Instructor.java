@@ -1,4 +1,4 @@
-package com.hibernate.onetomany.bidirectional;
+package com.hibernate.onetomany.entityclass.bidirectional;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class Instructor {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetailClass instructorDetailClass;
-	
+
 	@OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
 	private List<Courses> courses;
 
@@ -88,15 +88,19 @@ public class Instructor {
 	public void setInstructorDetailClass(InstructorDetailClass instructorDetailClass) {
 		this.instructorDetailClass = instructorDetailClass;
 	}
-	
-	
+
+	public List<Courses> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Courses> courses) {
+		this.courses = courses;
+	}
 
 	@Override
 	public String toString() {
 		return "Instructor [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
 				+ ", instructorDetailClass=" + instructorDetailClass + "]";
 	}
-	
-	
 
 }
